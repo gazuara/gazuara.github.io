@@ -14,6 +14,23 @@
         p {
             line-height: 1.5;
         }
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+          function translateToSpanish() {
+            var textToTranslate = $('body').html();
+            var encodedText = encodeURIComponent(textToTranslate);
+            var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=es&dt=t&q=' + encodedText;
+
+        $.ajax({
+          url: url,
+          success: function(response) {
+            var translatedText = response[0][0][0];
+            $('body').html(translatedText);
+          }
+        });
+      }
+</script>
+
     </style>
 </head>
 <body>
