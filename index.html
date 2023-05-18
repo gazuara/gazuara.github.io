@@ -14,24 +14,30 @@
         p {
             line-height: 1.5;
         }
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-          function translateToSpanish() {
-            var textToTranslate = $('body').html();
-            var encodedText = encodeURIComponent(textToTranslate);
-            var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=es&dt=t&q=' + encodedText;
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      function translateToSpanish() {
+        var textToTranslate = $('body').html();
+        var encodedText = encodeURIComponent(textToTranslate);
+        var url = 'https://translation.googleapis.com/language/translate/v2?key=TU_CLAVE_DE_API';
 
         $.ajax({
           url: url,
+          type: 'POST',
+          data: {
+            q: encodedText,
+            source: 'en',
+            target: 'es',
+            format: 'html'
+          },
           success: function(response) {
-            var translatedText = response[0][0][0];
+            var translatedText = response.data.translations[0].translatedText;
             $('body').html(translatedText);
           }
         });
       }
-</script>
-
-    </style>
+    </script>
 </head>
 <body>
     <header>
